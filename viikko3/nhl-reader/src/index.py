@@ -24,9 +24,11 @@ def main():
 
             players.append(player)
 
+    players.sort(key=lambda player: player.points, reverse=True)
+
     print("Finnish players:")
 
     for player in players:
-        print(player)
+        print(f"{player.name:20} {player.team:4} {player.points:4}")
 
 main()
