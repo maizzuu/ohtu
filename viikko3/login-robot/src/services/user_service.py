@@ -1,11 +1,15 @@
 from entities.user import User
-
+from string import ascii_lowercase
 
 class UserInputError(Exception):
     pass
 
 
 class AuthenticationError(Exception):
+    pass
+
+
+class RequirementsNotMetError(Exception):
     pass
 
 
@@ -37,4 +41,20 @@ class UserService:
         if not username or not password:
             raise UserInputError("Username and password are required")
 
-        # toteuta loput tarkastukset tänne ja nosta virhe virhetilanteissa
+        if len(username) < 3:
+            raise RequirementsNotMetError("Username or password does not meet requirements")
+
+        for letter in username:
+            if letter not in ascii_lowercase:
+                raise RequirementsNotMetError("Username or password does not meet requirements")
+        
+        if len(password) < 8:
+            raise RequirementsNotMetError("Username or password does not meet requirements")
+
+        for letter in password:
+            if letter not in ascii_lowercase:
+                if letter not in "0123456789":
+                    raise RequirementsNotMetError("Username or password does not meet requirements")
+        
+        if not any(char.isdigit() for char in password):
+            raise RequirementsNotMetError("Username or password does not meet requirements")
