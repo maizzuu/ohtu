@@ -1,6 +1,7 @@
 class Sovelluslogiikka:
     def __init__(self, tulos=0):
         self.tulos = tulos
+        self.edellinen = None
 
     def miinus(self, arvo):
         self.tulos = self.tulos - arvo
