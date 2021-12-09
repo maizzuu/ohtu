@@ -55,3 +55,11 @@ class HasFewerThan:
         return player_value < self._value
 
     
+class Or:
+    def __init__(self, *attrs):
+        self._attrs = attrs
+    def matches(self, player):
+        for attr in self._attrs:
+            if attr.matches(player):
+                return True
+        return False 
